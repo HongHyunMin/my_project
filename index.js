@@ -44,6 +44,10 @@ app.use('/chats', require('./routes/chats'));
 
 var count=1;
 io.on('connection', function(socket){
+  socket.on('join', function(data) {
+    socket.broadcast.emit('join message', { name: data.name });
+  });
+
   console.log('user connected: ', socket.id);
   var name = "user" + count++;
   io.to(socket.id).emit('change name',name);
@@ -53,9 +57,11 @@ io.on('connection', function(socket){
   });
 
   socket.on('send message', function(name,text){
-    var msg = name + ' : ' + text;
+    socket.emit('my message', text);
+    socket.broadcast.emit('other message', name + ' : ' + text);
+    //var msg = name + ' : ' + text;
     //console.log(msg);
-    io.emit('receive message', msg);
+    //io.emit('receive message', msg);
   });
 });
 

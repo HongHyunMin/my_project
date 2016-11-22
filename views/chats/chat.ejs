@@ -2,6 +2,7 @@
 <html>
   <head>
     <% include ../partials/head %>
+    <link href="/stylesheets/style.css" rel="stylesheet"/>
   </head>
   <body>
     <div class="container theme-showcase" id="chatDiv">
@@ -18,13 +19,22 @@
               <% } else { %>
                 로그인을 해주세요.
               <% } %>
+              <p class="text-right" id="joinMsg"></p>
             </h3>
           </div>
           <div class="panel-body">
               <p class="text-right">
                 <a href="/posts"><button class="btn btn-sm btn-default">Home</button></a>
               </p>
-              <textarea id="chatLog" class="chat_log" readonly="readonly" style="width:100%;" rows="10"></textarea>
+
+
+              <div class="background" >
+                <div class ="msgbox" id="messages" style="overflow-x:hidden;overflow-y:scroll;width:100%;height:400px;">
+              </div>
+
+            <!--  <textarea id="chatLog" class="chat_log" readonly="readonly" style="width:100%;" rows="10"></textarea> -->
+
+
               <% if(user) {%>
               <form id="chat">
                 <div class="alert alert-success" role="alert">
@@ -32,9 +42,12 @@
                   <span class="label label-success">`</span>  <strong>화면이 나타남</strong>
                 </div>
                 <div class="input-group">
-                  <input type="text" id="message" name="message" class="form-control" placeholder="내용을 입력하세요..">
+                  <input type="text" id="message" name="message" autocomplete="off" class="form-control" placeholder="내용을 입력하세요..">
                   <span class="input-group-btn">
                     <button class="btn btn-default" type="button" id="chatBtn">enter</button>
+                  </span>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="chatBtn2">call</button>
                   </span>
                 </div>
               </form>
@@ -44,6 +57,14 @@
                 <script type="text/javascript" src="/js/jquery/jquery-1.11.3.js"></script>
                 <script>
                   var socket = io();
+
+                  socket.emit("join", { name: $('#name').text() });
+
+                  socket.on('join message', function(data){
+                    if(data.name != ''){
+                      $('#joinMsg').html('<span class="label label-info">'+data.name+' 입장.</span>');
+                    }
+                  });
 
                   $('#chat').on('submit', function(e){
                     if('' != $('#message').val()){
@@ -61,6 +82,14 @@
                     }
                   });
 
+                  $('#chatBtn2').on('click', function(e){
+                    if('' != $('#message').val()){
+                      socket.emit('send message', $('#name').text(), $('#message').val());
+                      $('#message').val("");
+                      e.preventDefault();
+                    }
+                  });
+
                   $(document).keydown(function(e){
                     if(e.keyCode==27){
                       $("#chatDiv").hide();
@@ -70,11 +99,22 @@
                     }
                   });
 
-                  socket.on('receive message', function(msg){
+                  /*socket.on('receive message', function(msg){
                     $('#chatLog').append(msg+"\n");
                     //$('#chatLog').scrollTop($('#chatLog').innerHeight());
                     $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
+                  });*/
+
+                  socket.on('my message', function (msg) {
+                    $('#messages').append($('<p class="talk me">').text(msg));
+                    $('#messages').scrollTop($('#messages')[0].scrollHeight);
                   });
+                  socket.on('other message', function (msg) {
+                    $('#messages').append($('<p class="talk other">').text(msg));
+                    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+                  });
+
+
                   /*
                   socket.on('change name', function(name){
                     $('#name').val(name);
