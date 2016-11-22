@@ -9,7 +9,8 @@ router.get('/new', function(req,res){
                             formData: req.flash('formData')[0],
                             emailError: req.flash('emailError')[0],
                             nicknameError: req.flash('nicknameError')[0],
-                            passwordError: req.flash('passwordError')[0]
+                            passwordError: req.flash('passwordError')[0],
+                            user:req.user
                           }
   );
 }); // new

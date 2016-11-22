@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <div class="container theme-showcase">
+      <div class="page-header">
+        <h3>녕구밍구 TALK</h3>
+      </div>
+      <div class="row">
+       <div class="col-md-12">
+         <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <% if(user) {%>
+                <span class="label label-primary" id="name" class="name"><%= user.nickname %></span>
+              <% } else { %>
+                로그인 필수
+              <% } %>
+            </h3>
+          </div>
+          <div class="panel-body">
+              <p class="text-right">
+                <a href="/posts"><button class="btn btn-sm btn-default">Home</button></a>
+              </p>
+              <textarea id="chatLog" class="chat_log" readonly="readonly" style="width:100%;" rows="10"></textarea>
+              <form id="chat">
+                <div class="input-group">
+                  <input type="text" id="message" name="message" class="form-control" placeholder="내용을 입력하세요..">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="chatBtn">enter</button>
+                  </span>
+                </div>
+              </form>
+              <div id="box" class="box">
+                <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+                <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+                <script>
+                  var socket = io();
+                  $('#chat').on('submit', function(e){
+                    if('' != $('#message').val()){
+                      socket.emit('send message', $('#name').text(), $('#message').val());
+                      $('#message').val("");
+                      e.preventDefault();
+                    }
+                  });
+                  $('#chatBtn').on('click', function(e){
+                    if('' != $('#message').val()){
+                      socket.emit('send message', $('#name').text(), $('#message').val());
+                      $('#message').val("");
+                      e.preventDefault();
+                    }
+                  });
+                  socket.on('receive message', function(msg){
+                    $('#chatLog').append(msg+"\n");
+                    $('#chatLog').scrollTop($('#chatLog').innerHeight())
+                  });
+                  /*
+                  socket.on('change name', function(name){
+                    $('#name').val(name);
+                  });
+                  */
+                </script>
+              </div>
+          </div>
+        </div>
+       </div>
+      </div>
+      <!-- main start-->
+          <footer>
+            <% include ../partials/footer %>
+          </footer>
+    </div>
+  </body>
+</html>

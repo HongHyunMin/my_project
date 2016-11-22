@@ -7,6 +7,9 @@ var flash    = require('connect-flash');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 // database
 mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
@@ -37,9 +40,27 @@ app.use(passport.session());
 app.use('/', require('./routes/home'));
 app.use('/users', require('./routes/users'));
 app.use('/posts', require('./routes/posts'));
+app.use('/chats', require('./routes/chats'));
+
+var count=1;
+io.on('connection', function(socket){
+  console.log('user connected: ', socket.id);
+  var name = "user" + count++;
+  io.to(socket.id).emit('change name',name);
+
+  socket.on('disconnect', function(){
+    console.log('user disconnected: ', socket.id);
+  });
+
+  socket.on('send message', function(name,text){
+    var msg = name + ' : ' + text;
+    //console.log(msg);
+    io.emit('receive message', msg);
+  });
+});
 
 var port = process.env.PORT || 3000;
 
-app.listen(port, function(){
+http.listen(port, function(){
   console.log('Server On!');
 });
