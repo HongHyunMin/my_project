@@ -34,7 +34,10 @@ app.use(session({secret:'MySecret'}));
 // passport
 var passport = require('./config/passport');
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session({
+             secret : 'MySecret',
+             cookie:{_expires : 60000000}, // time im ms
+             }));
 
 // routes
 app.use('/', require('./routes/home'));
