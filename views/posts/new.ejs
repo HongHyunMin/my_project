@@ -2,30 +2,29 @@
 <html>
   <head>
     <% include ../partials/head %>
+    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet"/>
   </head>
   <body>
-    <div class="posts">
-    <% include partials/top %>
-<!-- main start-->
-
-<!-- views/posts/index.ejs -->
-<div class="new">
-  <h3>New Post</h3>
   <form class="posts_form" action="/posts" method="post">
-    <label>Title</label>
-    <input type="text" name="post[title]" value="">
-    <label>Body</label>
-    <textarea name="post[body]"></textarea>
-    <div class="float_right">Auther: <%= user.nickname %></div>
-    <button type="submit">Submit</button>
-  </form>
-  <a href="javascript:history.back()"><button>Back</button>
-</div>
-
-<!-- main end -->
-    </div><!--posts end -->
-    <footer>
-      <% include ../partials/footer %>
-    </footer>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="/posts">Home</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">new post</h3>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item"><span class="label label-default">제목</span> : <input type="text" name="post[title]" value=""></li>
+        <li class="list-group-item"><span class="label label-default">Auther</span> : <%= user.nickname %></li>
+        <li class="list-group-item"><textarea name="post[body]" style="width:100%" rows="15"></textarea></li>
+      </ul>
+      <div class="btn-group" role="group" aria-label="..." style="float:right">
+        <button class="btn btn-default" role="button" type="submit">저장</button>
+        <a class="btn btn-default" role="button" href="/posts">Back</a>
+      </div>
+    </div> <!-- /container -->
+    </form>
   </body>
 </html>

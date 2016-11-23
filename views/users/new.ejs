@@ -2,37 +2,44 @@
 <html>
   <head>
     <% include ../partials/head %>
+    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet"/>
   </head>
   <body>
-    <div class="users">
-<!-- main start-->
-
-<!-- views/users/new.ejs -->
-
-<div class="new">
-  <h3>Sign Up</h3>
   <form id="create_user" class="users_form" action="/users" method="post">
-    <label>Email* <span id="email_error" class="error_message"><%= emailError?emailError:"" %></span></label>
-    <input type="text" id="email" name="user[email]" value="<%= formData?formData.email:"" %>">
-    <label>Nickname* <span id="nickname_error" class="error_message"><%= nicknameError?nicknameError:"" %></span></label>
-    <input type="text" id="nickname" name="user[nickname]" value="<%= formData?formData.nickname:"" %>">
-    <label>Password* <span id="password_error" class="error_message"><%= passwordError?passwordError:"" %></span></label>
-    <input type="password" id="password" name="user[password]" value="">
-    <label>Password Confirmation* <span id="password_confirmation_error" class="error_message"></span></label>
-    <input type="password" id="password_confirmation" name="user[passwordConfirmation]" value="">
-    <p><small>*Required</small></p>
-    <input type="button" class="submit_btn" value="Submit">
-  </form>
-  <a href="javascript:history.back()"><button>Back</button>
-</div>
-
-<!-- javascript -->
-<script type="text/javascript" src="/js/userform.js"></script>
-
-<!-- main end -->
-    </div><!--users end -->
-    <footer>
-      <% include ../partials/footer %>
-    </footer>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="/posts">Home</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Sign Up</h3>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <span class="label label-default">Email*</span> : <input type="text" id="email" name="user[email]" value="<%= formData?formData.email:"" %>">
+          <span id="email_error" class="error_message"><%= emailError?emailError:"" %></span>
+        </li>
+        <li class="list-group-item">
+          <span class="label label-default">Nickname*</span> : <input type="text" id="nickname" name="user[nickname]" value="<%= formData?formData.nickname:"" %>">
+          <span id="nickname_error" class="error_message"><%= nicknameError?nicknameError:"" %></span>
+        </li>
+        <li class="list-group-item">
+          <span class="label label-default">Password*</span> : <input type="password" id="password" name="user[password]" value="">
+          <span id="password_error" class="error_message"><%= passwordError?passwordError:"" %></span>
+        </li>
+        <li class="list-group-item">
+          <span class="label label-default">Password Confirmation*</span> : <input type="password" id="password_confirmation" name="user[passwordConfirmation]" value="">
+          <span id="password_confirmation_error" class="error_message"></span>
+        </li>
+      </ul>
+      <div class="btn-group" role="group" aria-label="..." style="float:right">
+        <button class="btn btn-default" role="button" type="button">회원가입</button>
+        <a class="btn btn-default" role="button" href="/posts">Back</a>
+      </div>
+    </div> <!-- /container -->
+    </form>
+    <!-- javascript -->
+    <script type="text/javascript" src="/js/userform.js"></script>
   </body>
 </html>

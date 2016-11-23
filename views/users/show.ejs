@@ -2,26 +2,29 @@
 <html>
   <head>
     <% include ../partials/head %>
+    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet"/>
   </head>
   <body>
-    <div class="users">
-<!-- main start-->
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="/posts">Home</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">User Info</h3>
+      </div>
+      <div class="alert alert-success" role="alert">
+        <strong>Email</strong> <%= user.email %>
+        <br><strong>Nickname</strong> <%= user.nickname %>
+      </div>
 
-<!-- views/users/show.ejs -->
-<div class="show">
-  <h3>User Info</h3>
-  <div class="content">
-    <p class="user_info">Email<small> : <%= user.email %></small></p>
-    <p class="user_info">Nickname<small> : <%= user.nickname %></small></p>
-    <a href="/users/<%=user._id%>/edit"><button>Edit</button></a>
-  </div>
-  <a href="/"><button>Back</button>
-</div>
-
-<!-- main end -->
-    </div><!--users end -->
-    <footer>
-      <% include ../partials/footer %>
-    </footer>
+      <div class="btn-group" role="group" aria-label="..." style="float:right">
+        <% if(user) { %>
+          <a class="btn btn-default" href="/users/<%=user._id%>/edit">Edit</a>
+        <% } %>
+        <a class="btn btn-default" role="button" href="/posts">Back</a>
+      </div>
+    </div> <!-- /container -->
   </body>
 </html>

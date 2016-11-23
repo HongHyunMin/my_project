@@ -1,6 +1,6 @@
 //console.log("userform.js");
 if(document.querySelector("#create_user")){
-  document.querySelector("#create_user input[type='button']").onclick = function(e){
+  document.querySelector("#create_user button[type='button']").onclick = function(e){
     var isValid = true;
     document.querySelector("#email_error").innerText = "";
     document.querySelector("#nickname_error").innerText = "";
@@ -27,7 +27,7 @@ if(document.querySelector("#create_user")){
   };
 }
 if(document.querySelector("#update_user")){
-  document.querySelector("#update_user input[type='button']").onclick = function(e){
+  document.querySelector("#update_user button[type='button']").onclick = function(e){
     var isValid = true;
     document.querySelector("#email_error").innerText = "";
     document.querySelector("#nickname_error").innerText = "";

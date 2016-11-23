@@ -2,43 +2,39 @@
 <html>
   <head>
     <% include ../partials/head %>
+    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet"/>
   </head>
   <body>
-    <div class="posts">
-    <% include partials/top %>
-<!-- main start-->
+  <form class="btn_delete" action="/posts/<%=post._id%>?_method=delete" method="post">
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="/posts">Home</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">show post</h3>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item"><span class="label label-default">제목</span> : <%= post.title %></li>
+        <li class="list-group-item"><p><%= post.body %></p></li>
+      </ul>
+      <div class="alert alert-success" role="alert">
+        <strong>Created at</strong> <%= post.createdAt.toLocaleDateString() %> / <%= post.createdAt.toLocaleTimeString() %>
+        <% if(post.updatedAt) { %>
+        <br><strong>Updated at</strong> <%= post.updatedAt.toLocaleDateString() %> / <%= post.updatedAt.toLocaleTimeString() %>
+        <% } %>
+        <br><strong>Auther:</strong> <%= post.author.nickname %>
+      </div>
 
-<!-- views/posts/show.ejs -->
-<div class="show">
-  <h3><%= post.title %></h3>
-  <div class="time">Created at <br>
-    <%= post.createdAt.toLocaleDateString() %> <br>
-    <%= post.createdAt.toLocaleTimeString() %>
-  </div>
-  <% if(post.updatedAt) { %>
-    <div class="time">Updated at <br>
-      <%= post.updatedAt.toLocaleDateString() %> <br>
-      <%= post.updatedAt.toLocaleTimeString() %>
-    </div>
-  <% } %>
-  <p class="body"><%= post.body %><p>
-  <div class="float_right">Auther: <%= post.author.nickname %></div>
-  <% if(user && user.equals(post.author._id)) { %>
-  <div class="tools">
-    <a href="/posts/<%=post._id%>/edit"><button>Edit</button></a>
-    <!-- Delete button here -->
-    <form class="btn_delete" action="/posts/<%=post._id%>?_method=delete" method="post">
-      <button type="submit">Delete</button>
+      <div class="btn-group" role="group" aria-label="..." style="float:right">
+        <% if(user && user.equals(post.author._id)) { %>
+          <a class="btn btn-default" role="button" href="/posts/<%=post._id%>/edit">Edit</a>
+          <button class="btn btn-default" role="button" type="submit">Delete</button>
+        <% } %>
+        <a class="btn btn-default" role="button" href="/posts">Back</a>
+      </div>
+    </div> <!-- /container -->
     </form>
-  </div>
-  <% } %>
-  <a href="/posts"><button>Back</button>
-</div>
-
-<!-- main end -->
-    </div><!--posts end -->
-    <footer>
-      <% include ../partials/footer %>
-    </footer>
   </body>
 </html>

@@ -5,7 +5,9 @@
   </head>
   <body>
     <div class="container theme-showcase">
-      <% include partials/top %>
+      <div class="page-header">
+        <h3>NGMG BOARD</h3>
+      </div>
       <!-- main start-->
 
     <!-- views/posts/index.ejs -->
@@ -38,7 +40,13 @@
             <tbody>
               <% posts.forEach(function(post){ %>
               <tr>
-                <td><a href="/posts/<%= post._id %>"><%= post.title %></a></td>
+                <td>
+                  <% if(user) {%>
+                  <a href="/posts/<%= post._id %>"><%= post.title %></a>
+                  <% } else { %>
+                    <%= post.title %>
+                  <% } %>
+                </td>
                 <td><%= post.createdAt.toLocaleDateString() %></td>
                 <td><%= post.author.nickname %></td>
               </tr>
