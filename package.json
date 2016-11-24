@@ -1,34 +1,34 @@
 {
-  "name": "gitstudy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HongHyunMin/my_project.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HongHyunMin/my_project/issues"
-  },
-  "homepage": "https://github.com/HongHyunMin/my_project#readme",
-  "dependencies": {
-    "async": "^2.1.2",
-    "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.15.2",
-    "connect-flash": "^0.1.1",
-    "ejs": "^2.5.2",
-    "express": "^4.14.0",
-    "express-session": "^1.14.2",
-    "method-override": "^2.3.7",
-    "mongoose": "^4.6.8",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
-    "socket.io": "^1.6.0"
-  }
+    "name": "gitstudy",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/HongHyunMin/my_project.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/HongHyunMin/my_project/issues"
+    },
+    "homepage": "https://github.com/HongHyunMin/my_project#readme",
+    "dependencies": {
+        "async": "^2.1.2",
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "^1.15.2",
+        "connect-flash": "^0.1.1",
+        "ejs": "^2.5.2",
+        "express": "^4.14.0",
+        "express-session": "^1.14.2",
+        "method-override": "^2.3.7",
+        "mongoose": "^4.6.8",
+        "passport": "^0.3.2",
+        "passport-local": "^1.0.0",
+        "socket.io": "^1.6.0"
+    }
 }

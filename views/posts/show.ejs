@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <% include ../partials/head %>
-    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet"/>
-  </head>
-  <body>
-  <form class="btn_delete" action="/posts/<%=post._id%>?_method=delete" method="post">
-    <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="/posts">Home</a></li>
-          </ul>
-        </nav>
-        <h3 class="text-muted">show post</h3>
-      </div>
-      <ul class="list-group">
-        <li class="list-group-item"><span class="label label-default">제목</span> : <%= post.title %></li>
-        <li class="list-group-item"><p><%= post.body %></p></li>
-      </ul>
-      <div class="alert alert-success" role="alert">
-        <strong>Created at</strong> <%= post.createdAt.toLocaleDateString() %> / <%= post.createdAt.toLocaleTimeString() %>
-        <% if(post.updatedAt) { %>
-        <br><strong>Updated at</strong> <%= post.updatedAt.toLocaleDateString() %> / <%= post.updatedAt.toLocaleTimeString() %>
-        <% } %>
-        <br><strong>Auther:</strong> <%= post.author.nickname %>
-      </div>
-
-      <div class="btn-group" role="group" aria-label="..." style="float:right">
-        <% if(user && user.equals(post.author._id)) { %>
-          <a class="btn btn-default" role="button" href="/posts/<%=post._id%>/edit">Edit</a>
-          <button class="btn btn-default" role="button" type="submit">Delete</button>
-        <% } %>
-        <a class="btn btn-default" role="button" href="/posts">Back</a>
-      </div>
-    </div> <!-- /container -->
+    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet" />
+</head>
+<body>
+    <form class="btn_delete" action="/posts/<%=post._id%>?_method=delete" method="post">
+        <div class="container">
+            <div class="header clearfix">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" class="active"><a href="/posts">Home</a></li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">show post</h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item"><span class="label label-default">제목</span> :
+                    <%= post.title %>
+                </li>
+                <li class="list-group-item">
+                    <p>
+                        <%= post.body %>
+                    </p>
+                </li>
+            </ul>
+            <div class="alert alert-success" role="alert">
+                <strong>Created at</strong>
+                <%= post.createdAt.toLocaleDateString() %> /
+                <%= post.createdAt.toLocaleTimeString() %>
+                <% if(post.updatedAt) { %>
+                    <br><strong>Updated at</strong>
+                    <%= post.updatedAt.toLocaleDateString() %> /
+                    <%= post.updatedAt.toLocaleTimeString() %>
+                <% } %>
+                    <br><strong>Auther:</strong>
+                    <%= post.author.nickname %>
+            </div>
+            <div class="btn-group" role="group" aria-label="..." style="float:right">
+                <% if(user && user.equals(post.author._id)) { %>
+                    <a class="btn btn-default" role="button" href="/posts/<%=post._id%>/edit">Edit</a>
+                    <button class="btn btn-default" role="button" type="submit">Delete</button>
+                <% } %>
+                    <a class="btn btn-default" role="button" href="/posts">Back</a>
+            </div>
+        </div>
+        <!-- /container -->
     </form>
-  </body>
+</body>
 </html>

@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <% include ../partials/head %>
-  </head>
-  <body>
-    <div class="container theme-showcase">
-      <div class="page-header">
-        <h3>NGMG BOARD</h3>
-      </div>
-      <!-- main start-->
 
-    <!-- views/posts/index.ejs -->
-    <div class="row">
-     <div class="col-md-12">
-       <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">NGMG</h3>
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <div class="container theme-showcase">
+        <div class="page-header">
+            <h3>NGMG BOARD</h3>
         </div>
-        <div class="panel-body">
-          <p class="text-right">
-            <a href="/posts/new"><button class="btn btn-sm btn-default">새글</button></a>
-            <% if(user) {%>
-              <a href="/users/<%= user._id %>"><button type="button" class="btn btn-sm btn-info">My Profile (<%= user.nickname %>)</button></a>
-              <a href="/chats/chating" class="float_right"><button type="button" class="btn btn-sm btn-warning">채팅</button></a>
-              <a href="/logout" class="float_right"><button type="button" class="btn btn-sm btn-danger">Logout</button></a>
-            <% } else { %>
-              <a href="/login" class="float_right"><button type="button" class="btn btn-sm btn-primary">로그인</button></a>
-              <a href="/users/new" class="float_right"><button type="button" class="btn btn-sm btn-success">회원가입</button></a>
-            <% } %>
-          </p>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% posts.forEach(function(post){ %>
-              <tr>
-                <td>
-                  <% if(user) {%>
-                  <a href="/posts/<%= post._id %>"><%= post.title %></a>
-                  <% } else { %>
-                    <%= post.title %>
-                  <% } %>
-                </td>
-                <td><%= post.createdAt.toLocaleDateString() %></td>
-                <td><%= post.author.nickname %></td>
-              </tr>
-              <% }) %>
-            </tbody>
-          </table>
+        <!-- main start-->
+
+        <!-- views/posts/index.ejs -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">NGMG</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-right">
+                            <a href="/posts/new"><button class="btn btn-sm btn-default">새글</button></a>
+                            <% if(user) {%>
+                                <a href="/users/<%= user._id %>"><button type="button" class="btn btn-sm btn-info">My Profile (<%= user.nickname %>)</button></a>
+                                <a href="/chats/chating" class="float_right"><button type="button" class="btn btn-sm btn-warning">채팅</button></a>
+                                <a href="/logout" class="float_right"><button type="button" class="btn btn-sm btn-danger">Logout</button></a>
+                            <% } else { %>
+                                <a href="/login" class="float_right"><button type="button" class="btn btn-sm btn-primary">로그인</button></a>
+                                <a href="/users/new" class="float_right"><button type="button" class="btn btn-sm btn-success">회원가입</button></a>
+                            <% } %>
+                        </p>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>작성일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% posts.forEach(function(post){ %>
+                                    <tr>
+                                        <td>
+                                            <% if(user) {%>
+                                                <a href="/posts/<%= post._id %>"><%= post.title %></a>
+                                            <% } else { %>
+                                                <%= post.title %>
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <%= post.createdAt.toLocaleDateString() %>
+                                        </td>
+                                        <td>
+                                            <%= post.author.nickname %>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- main end -->
         </div>
-      </div>
-     </div>
-    <!-- main end -->
-    </div><!--posts end -->
-    <footer>
-      <% include ../partials/footer %>
-    </footer>
-  </body>
+        <!--posts end -->
+        <footer>
+            <% include ../partials/footer %>
+        </footer>
+</body>
+
 </html>

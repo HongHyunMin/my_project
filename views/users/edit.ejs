@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <% include ../partials/head %>
-    <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet"/>
-  </head>
-  <body>
-  <form id="update_user" class="users_form" action="/users/<%= user._id %>?_method=put" method="post">
-    <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="/posts">Home</a></li>
-          </ul>
-        </nav>
-        <h3 class="text-muted">Update User</h3>
-      </div>
-      <ul class="list-group">
-        <li class="list-group-item">
-          <span class="label label-default">Current Password*</span> : <input type="password" id="password" name="user[password]" value="">
-          <span id="password_error" class="error_message"><%= passwordError?passwordError:"" %></span>
-        </li>
-        <li class="list-group-item">
-          <span class="label label-default">Email*</span> : <input type="text" id="email" name="user[email]" value="<%= formData?formData.email:(user?user.email:"") %>">
-          <span id="email_error" class="error_message"><%= emailError?emailError:"" %></span>
-        </li>
-        <li class="list-group-item">
-          <span class="label label-default">Nickname*</span> : <input type="text" id="nickname" name="user[nickname]" value="<%= formData?formData.nickname:(user?user.nickname:"") %>">
-          <span id="nickname_error" class="error_message"><%= nicknameError?nicknameError:"" %></span>
-        </li>
-        <li class="list-group-item">
-          <span class="label label-default">New Password*</span> : <input type="password" id="new_password" name="user[newPassword]" value="">
 
-        </li>
-        <li class="list-group-item">
-          <span class="label label-default">Password Confirmation*</span> : <input type="password" id="password_confirmation" name="user[passwordConfirmation]" value="">
-          <span id="password_confirmation_error" class="error_message"></span>
-        </li>
-      </ul>
-      <div class="btn-group" role="group" aria-label="..." style="float:right">
-        <button class="btn btn-default" role="button" type="button">수정</button>
-        <a class="btn btn-default" role="button" href="/posts">Back</a>
-      </div>
-    </div> <!-- /container -->
+<head>
+    <% include ../partials/head %>
+        <link href="/stylesheets/jumbotron-narrow.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form id="update_user" class="users_form" action="/users/<%= user._id %>?_method=put" method="post">
+        <div class="container">
+            <div class="header clearfix">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" class="active"><a href="/posts">Home</a></li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">Update User</h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="label label-default">Current Password*</span> : <input type="password" id="password" name="user[password]" value="">
+                    <span id="password_error" class="error_message"><%= passwordError?passwordError:"" %></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="label label-default">Email*</span> : <input type="text" id="email" name="user[email]" value="<%= formData?formData.email:(user?user.email:" ") %>">
+                    <span id="email_error" class="error_message"><%= emailError?emailError:"" %></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="label label-default">Nickname*</span> : <input type="text" id="nickname" name="user[nickname]" value="<%= formData?formData.nickname:(user?user.nickname:" ") %>">
+                    <span id="nickname_error" class="error_message"><%= nicknameError?nicknameError:"" %></span>
+                </li>
+                <li class="list-group-item">
+                    <span class="label label-default">New Password*</span> : <input type="password" id="new_password" name="user[newPassword]" value="">
+
+                </li>
+                <li class="list-group-item">
+                    <span class="label label-default">Password Confirmation*</span> : <input type="password" id="password_confirmation" name="user[passwordConfirmation]" value="">
+                    <span id="password_confirmation_error" class="error_message"></span>
+                </li>
+            </ul>
+            <div class="btn-group" role="group" aria-label="..." style="float:right">
+                <button class="btn btn-default" role="button" type="button">수정</button>
+                <a class="btn btn-default" role="button" href="/posts">Back</a>
+            </div>
+        </div>
+        <!-- /container -->
     </form>
     <!-- javascript -->
     <script type="text/javascript" src="/js/userform.js"></script>
-  </body>
+</body>
+
 </html>
