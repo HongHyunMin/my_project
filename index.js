@@ -9,6 +9,10 @@ var methodOverride = require('method-override');
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var CORS = require('cors')();
+
+// 마찬가지로 app.use(router)전에 삽입한다
+app.use(CORS);
 
 // database
 mongoose.connect(process.env.MONGO_DB);
@@ -44,6 +48,20 @@ app.use(passport.session({
         _expires: 60000000
     }, // time im ms
 }));
+
+var allowCrossDomain = function(req, res, next) {
+    if ('OPTIONS' == req.method) {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+app.use(allowCrossDomain);
 
 // routes
 app.use('/', require('./routes/home'));
